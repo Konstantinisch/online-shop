@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/users")
-public class Users {
+@RequestMapping(value = "/orderItems")
+public class OrderItemsController {
     @GetMapping
-    String getUsers(){
-        return "Chao, we are Users, your Friends! We are really glad to be here and help you!!! ";
+    String getOrderItems(){
+        return "Hi, we are your new Order Items. Are you happy?";
     }
 }

@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/tree")
-public class CartItems {
+@RequestMapping(value = "/cartItems")
+public class CartItemsController {
 
     @GetMapping
     String getCartItems(){
         return "Hi, I'm your new CartItem";
     }
 
-    @GetMapping(value = "/oak")
+    @GetMapping(value = "/nextCartItems")
     String getCartItems2(){
         return "Hi, what is your favorite Item?";
     }

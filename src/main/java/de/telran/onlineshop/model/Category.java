@@ -40,7 +40,9 @@ public class Category {
 
     @Override
     public int hashCode() {
-        return Objects.hash(categoryID, name);
+        int result = Long.hashCode(categoryID);
+        result = 31 * result + Objects.hashCode(name);
+        return result;
     }
 
     @Override
