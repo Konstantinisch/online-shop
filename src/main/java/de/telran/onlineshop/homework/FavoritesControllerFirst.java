@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/Favorites")
-public class FavoritesController {
+public class FavoritesControllerFirst {
 
     @GetMapping
     String getFavorites(){

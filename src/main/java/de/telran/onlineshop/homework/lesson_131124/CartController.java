@@ -1,7 +1,7 @@
 package de.telran.onlineshop.homework.lesson_131124;
 
-import de.telran.onlineshop.model.Category;
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class CartController {
     }
 
     @GetMapping(value = "/{id}")
-    public Cart getCartbyID(@PathVariable Integer id) {
+    public Cart getCartByID(@PathVariable Integer id) {
         return cartList.stream()
                 .filter(cart -> cart.getCartID() == id)
                 .findFirst()
@@ -66,5 +66,11 @@ public class CartController {
                 it.remove();
             }
         }
+    }
+
+    @PreDestroy
+    void destroyCart(){
+        System.out.println(("There is a possibility to do a particular" +
+                " Logic by this step! ") +this.getClass().getName());
     }
 }

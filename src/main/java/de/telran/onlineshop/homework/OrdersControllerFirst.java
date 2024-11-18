@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/orders")
-public class OrdersController {
+public class OrdersControllerFirst {
 
     @GetMapping
     String getOrders(){

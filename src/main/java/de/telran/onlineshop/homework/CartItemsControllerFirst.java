@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/cartItems")
-public class CartItemsController {
+@RequestMapping(value = "/cartItemsFirst")
+public class CartItemsControllerFirst {
 
     @GetMapping
     String getCartItems(){
