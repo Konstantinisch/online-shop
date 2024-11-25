@@ -14,8 +14,11 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 public class UsersController {
-    @Autowired
     private UsersService usersService;
+
+    public UsersController(UsersService usersService) {
+        this.usersService = usersService;
+    }
 
     @GetMapping  //select
     public ResponseEntity<List<User>> getAllUsers() {

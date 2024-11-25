@@ -1,8 +1,12 @@
 package de.telran.onlineshop.service;
 
+import de.telran.onlineshop.entity.CategoriesEntity;
 import de.telran.onlineshop.model.Category;
+import de.telran.onlineshop.repository.CategoriesRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,34 +16,60 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor // добавится конструктор, в который включатся все private final характеристики
 public class CategoriesService {
     private List<Category> categoryList;
 
+    private final CategoriesRepository categoriesRepository;
+
     @PostConstruct
     void init() {
-        categoryList = new ArrayList<>();
-        categoryList.add(new Category(1, "Продукты"));
-        categoryList.add(new Category(2, "Быт.химия>"));
-        categoryList.add(new Category(3, "Радиотехника"));
-        categoryList.add(new Category(4, "Игрушки"));
-        categoryList.add(new Category(5, "Одежда"));
-        categoryList.add(new Category(6, "Other"));
+        CategoriesEntity category1 = new CategoriesEntity(null, "Продукты");
+        categoriesRepository.save(category1);
+        CategoriesEntity category2 = new CategoriesEntity(null, "Быт.химия");
+        categoriesRepository.save(category2);
+        CategoriesEntity category3 = new CategoriesEntity(null, "Радиотехника");
+        categoriesRepository.save(category3);
+        CategoriesEntity category4 = new CategoriesEntity(null, "Игрушки");
+        categoriesRepository.save(category4);
+        CategoriesEntity category5 = new CategoriesEntity(null, "Одежда");
+        categoriesRepository.save(category5);
+        CategoriesEntity category6 = new CategoriesEntity(null, "Other");
+        category6 = categoriesRepository.save(category6);
+        category6.setName("Другие");
+        categoriesRepository.save(category6);
 
-        System.out.println("Выполняем логику при создании объекта "+this.getClass().getName());
+
+        System.out.println("Выполняем логику при создании объекта " + this.getClass().getName());
     }
 
     public List<Category> getAllCategories() {
-        return categoryList;
+        List<CategoriesEntity> categoriesEntities = categoriesRepository.findAll();
+        return categoriesEntities.stream()
+                .map(entity -> new Category(entity.getCategoryId(), entity.getName()))
+                .collect(Collectors.toList());
     }
 
+//    public List<Category> getAllCategoriesCycle() {
+//        List<CategoriesEntity> categoriesEntities = categoriesRepository.findAll();
+//        List<Category> categories = new ArrayList<>();
+//        for (int i = 0; i < categoriesEntities.size(); i++) {
+//            categories.add(new Category(categoriesEntities.get(i).getCategoryId(),
+//                    categoriesEntities.get(i).getName()));
+//        }
+//        return categories;
+//    }
+
+
     public Category getCategoryById(@PathVariable Long id) { ///categories/find/3
-        if(id > 7) {
+        if (id > 7) {
             throw new IllegalArgumentException("Не корректный Id");
         }
         return categoryList.stream()
-                .filter(category -> category.getCategoryID()==id)
+                .filter(category -> category.getCategoryID() == id)
                 .findFirst()
                 .orElse(null);
     }
@@ -60,7 +90,7 @@ public class CategoriesService {
                 .filter(category -> category.getCategoryID() == updCategory.getCategoryID())
                 .findFirst()
                 .orElse(null);
-        if(result!=null) {
+        if (result != null) {
             result.setName(updCategory.getName());
         }
         return result;
@@ -70,7 +100,7 @@ public class CategoriesService {
         Iterator<Category> it = categoryList.iterator();
         while (it.hasNext()) {
             Category current = it.next();
-            if(current.getCategoryID()==id) {
+            if (current.getCategoryID() == id) {
                 it.remove();
             }
         }
@@ -79,6 +109,6 @@ public class CategoriesService {
     @PreDestroy
     void destroy() {
         categoryList.clear();
-        System.out.println("Выполняем логику при окончании работы с  объектом "+this.getClass().getName());
+        System.out.println("Выполняем логику при окончании работы с  объектом " + this.getClass().getName());
     }
 }

@@ -1,26 +1,24 @@
-package de.telran.onlineshop.homework.lesson_131124;
-
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+package de.telran.onlineshop.model;
 
 import java.util.Objects;
 
 public class Cart {
-    private int cartID;
+    private long cartID;
     private int userID;
 
     public Cart() {
     }
 
-    public Cart(int cartID, int userID) {
+    public Cart(long cartID, int userID) {
         this.cartID = cartID;
         this.userID = userID;
     }
 
-    public int getCartID() {
+    public long getCartID() {
         return cartID;
     }
 
-    public void setCartID(int cartID) {
+    public void setCartID(long cartID) {
         this.cartID = cartID;
     }
 

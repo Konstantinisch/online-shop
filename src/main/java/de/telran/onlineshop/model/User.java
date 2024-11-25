@@ -3,7 +3,7 @@ package de.telran.onlineshop.model;
 import java.util.Objects;
 
 public class User {
-    private Long userID;
+    private Long userId;
     private String name;
     private String email;
     private String phoneNumber;
@@ -12,20 +12,20 @@ public class User {
     public User() {
     }
 
-    public User(Long userID, String name, String email, String phoneNumber, String passwordHash) {
-        this.userID = userID;
+    public User(Long userId, String name, String email, String phoneNumber, String passwordHash) {
+        this.userId = userId;
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.passwordHash = passwordHash;
     }
 
-    public Long getUserID() {
-        return userID;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserID(Long userID) {
-        this.userID = userID;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -65,18 +65,18 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(userID, user.userID) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(passwordHash, user.passwordHash);
+        return Objects.equals(userId, user.userId) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(phoneNumber, user.phoneNumber) && Objects.equals(passwordHash, user.passwordHash);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userID, name, email, phoneNumber, passwordHash);
+        return Objects.hash(userId, name, email, phoneNumber, passwordHash);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userID=" + userID +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
