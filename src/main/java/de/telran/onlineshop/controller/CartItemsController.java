@@ -1,13 +1,9 @@
 package de.telran.onlineshop.controller;
 
-import de.telran.onlineshop.model.CartItems;
+import de.telran.onlineshop.dto.CartItems;
 import de.telran.onlineshop.service.CartItemsService;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @RestController

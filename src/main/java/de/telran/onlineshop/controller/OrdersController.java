@@ -1,14 +1,17 @@
 package de.telran.onlineshop.controller;
 
 //import de.telran.onlineshop.model.Orders;
-import de.telran.onlineshop.model.Order;
+import de.telran.onlineshop.dto.OrderDto;
+import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.service.OrdersService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/orders/{id}")
+@RequestMapping(value = "/orders")
 public class OrdersController {
 
     private  OrdersService ordersService;
@@ -19,18 +22,35 @@ public class OrdersController {
 
 
     @GetMapping
-    public List<Order> getAllOrders () {
+    public List<OrderDto> getAllOrders () {
         return ordersService.getAllOrders();
     }
 
-//    @PostMapping
-//    public Orders addOrder (@PathVariable Long id, @RequestParam Orders order) {
-//        return  ordersService.addOrderToUser(id, order);
-//    }
 
-//        @GetMapping
-//    public ResponseEntity<List<Orders>> getAllOrders(@PathVariable Long userId) {
-//        User user = usersService.getUserById(userId);
-//        return ResponseEntity.status(201).body(user.getOrdersList());
-//    }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id) {
+        OrderDto order = ordersService.getOrderById(id);
+        return ResponseEntity.status(222).body(order);
+    }
+
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping //Jackson
+    public boolean createOrders(@RequestBody OrderDto newOrder) { //insert
+        return ordersService.createOrders(newOrder);
+    }
+
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @PutMapping
+    public OrderDto updateOrder(@RequestBody OrderDto updOrder) { //update
+        return ordersService.updateOrders(updOrder);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteOrders(@PathVariable Long id) { //delete
+       ordersService.deleteOrders(id);
+    }
+
+
+
 }

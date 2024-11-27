@@ -1,6 +1,6 @@
 package de.telran.onlineshop.entity;
 
-import de.telran.onlineshop.model.OrdersEnum;
+import de.telran.onlineshop.dto.OrdersEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,7 +19,7 @@ public class OrdersEntity {
     @Id
     @Column(name = "OrderID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    private Long orderId;
 
     @Column(name = "UserID")
     private int userId;

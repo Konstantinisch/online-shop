@@ -1,4 +1,4 @@
-package de.telran.onlineshop.model;
+package de.telran.onlineshop.dto;
 
 import java.util.Objects;
 

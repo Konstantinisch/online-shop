@@ -1,4 +1,4 @@
-package de.telran.onlineshop.model;
+package de.telran.onlineshop.dto;
 
 public enum OrdersEnum {
     ORDERED,

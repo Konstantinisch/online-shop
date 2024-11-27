@@ -1,10 +1,10 @@
-package de.telran.onlineshop.model;
+package de.telran.onlineshop.dto;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class Order {
-    private int orderId;
+public class OrderDto {
+    private Long orderId;
     private int userId;
     private Timestamp createdAt;
     private String deliveryAddress;
@@ -13,11 +13,11 @@ public class Order {
     private OrdersEnum status;
     private Timestamp updatedAt;
 
-    public Order() {
+    public OrderDto() {
     }
 
-    public Order(int orderID, int userID, Timestamp createdAt, String deliveryAddress,
-                 int contactPhone, String deliveryMethod, OrdersEnum status, Timestamp updatedAt) {
+    public OrderDto(Long orderID, int userID, Timestamp createdAt, String deliveryAddress,
+                    int contactPhone, String deliveryMethod, OrdersEnum status, Timestamp updatedAt) {
         this.orderId = orderID;
         this.userId = userID;
         this.createdAt = createdAt;
@@ -28,11 +28,11 @@ public class Order {
         this.updatedAt = updatedAt;
     }
 
-    public int getOrderID() {
+    public Long getOrderID() {
         return orderId;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(Long orderID) {
         this.orderId = orderID;
     }
 
@@ -96,7 +96,7 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Order orders = (Order) o;
+        OrderDto orders = (OrderDto) o;
         return orderId == orders.orderId && userId == orders.userId && contactPhone == orders.contactPhone && Objects.equals(createdAt, orders.createdAt) && Objects.equals(deliveryAddress, orders.deliveryAddress) && Objects.equals(deliveryMethod, orders.deliveryMethod) && Objects.equals(status, orders.status) && Objects.equals(updatedAt, orders.updatedAt);
     }
 

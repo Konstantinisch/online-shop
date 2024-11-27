@@ -1,7 +1,7 @@
 package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.service.CartService;
-import de.telran.onlineshop.model.Cart;
+import de.telran.onlineshop.dto.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

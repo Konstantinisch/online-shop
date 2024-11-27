@@ -1,16 +1,14 @@
 package de.telran.onlineshop.service;
 
+import de.telran.onlineshop.dto.CategoryDto;
 import de.telran.onlineshop.entity.CategoriesEntity;
 import de.telran.onlineshop.entity.UsersEntity;
-import de.telran.onlineshop.model.Category;
-import de.telran.onlineshop.model.User;
+import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.repository.UsersRepository;
 import jakarta.annotation.PostConstruct;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +16,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UsersService {
 
-    private List<User> userList;
+    private List<UserDto> userList;
 
     private final UsersRepository usersRepository;
 
@@ -36,31 +34,58 @@ public class UsersService {
         System.out.println("Выполняем логику при создании объекта " + this.getClass().getName());
     }
 
-    public List<User> getAllUsers() {
+    public List<UserDto> getAllUsers() {
         List<UsersEntity> usersEntities = usersRepository.findAll();
         return usersEntities.stream()
-                .map(entity -> new User(entity.getUserId(), entity.getName(), entity.getEmail(),
+                .map(entity -> new UserDto(entity.getUserId(), entity.getName(), entity.getEmail(),
                         entity.getPhoneNumber(), entity.getPasswordHash()))
                 .collect(Collectors.toList());
     }
 
-    public User getUserById(Long id) {
-        return userList.stream()
-                .filter(user -> user.getUserId() == id)
-                .findFirst()
-                .orElse(null);
+
+
+    public UserDto getUserById(Long id) {
+        UsersEntity usersEntity = usersRepository.findById(id).orElse(new UsersEntity());
+        return new UserDto(usersEntity.getUserId(), usersEntity.getName(), usersEntity.getEmail(),
+                usersEntity.getPhoneNumber(), usersEntity.getPasswordHash());
     }
 
-    public User updateUser(User user) {
-        User result = userList.stream()
-                .filter(u -> u.getUserId() == user.getUserId())
-                .findFirst()
-                .orElse(null);
-        if (result != null) {
-            result.setName(user.getName());
-            result.setEmail(user.getEmail());
-            result.setPhoneNumber(user.getPhoneNumber());
+    public UserDto getUserByName(String name) {///users/get?name=Other,k=2
+        //UsersEntity usersEntity = usersRepository.findByName(name);//use OQL
+        UsersEntity usersEntity = usersRepository.findByNameNative(name); //use native SQL
+
+        return new UserDto(usersEntity.getUserId(), usersEntity.getName(), usersEntity.getEmail(),
+                usersEntity.getPhoneNumber(), usersEntity.getPasswordHash());
+    }
+
+    public boolean createUsers( UserDto newUser) { //insert
+        UsersEntity createUserEntity = new UsersEntity(null, newUser.getName(), newUser.getEmail(),
+                newUser.getPhoneNumber(), newUser.getPasswordHash());
+        UsersEntity returnUserEntity = usersRepository.save(createUserEntity);
+
+
+        return returnUserEntity.getUserId() != null;
+    }
+
+    public UserDto updateUsers(UserDto updUser) { //update
+        UsersEntity createUserEntity = new UsersEntity(updUser.getUserId(), updUser.getName(),
+                updUser.getEmail(), updUser.getPhoneNumber(), updUser.getPasswordHash());
+        UsersEntity returnUserEntity = usersRepository.save(createUserEntity);
+        //transformiruem dannie is Entity v DTO i vosvraschaem polsovatelju
+
+        return new UserDto(returnUserEntity.getUserId(), returnUserEntity.getName(), returnUserEntity.getEmail(),
+                returnUserEntity.getPhoneNumber(), returnUserEntity.getPasswordHash());
+    }
+
+    public void deleteUsers( Long id) { //delete
+        //categoriesRepository.deleteById(id); // first variant realisazii menee informativno
+
+        UsersEntity users = usersRepository.findById(id).orElse(null);
+        if (users == null) {
+            throw new RuntimeException("Net takogo objecta s id =" + id);
+        } else {
+            usersRepository.delete(users);
         }
-        return result;
+
     }
 }

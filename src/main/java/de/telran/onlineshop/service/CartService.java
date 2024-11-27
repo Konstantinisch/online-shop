@@ -1,8 +1,7 @@
 package de.telran.onlineshop.service;
 
 import de.telran.onlineshop.entity.CartEntity;
-import de.telran.onlineshop.model.Cart;
-import de.telran.onlineshop.model.Category;
+import de.telran.onlineshop.dto.Cart;
 import de.telran.onlineshop.repository.CartRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
