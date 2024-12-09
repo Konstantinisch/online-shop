@@ -2,7 +2,6 @@ package de.telran.onlineshop.controller;
 
 //import de.telran.onlineshop.model.Orders;
 import de.telran.onlineshop.dto.OrderDto;
-import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.service.OrdersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

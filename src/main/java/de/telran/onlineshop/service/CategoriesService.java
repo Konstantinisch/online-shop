@@ -3,6 +3,7 @@ package de.telran.onlineshop.service;
 import de.telran.onlineshop.entity.CategoriesEntity;
 import de.telran.onlineshop.dto.CategoryDto;
 import de.telran.onlineshop.repository.CategoriesRepository;
+import de.telran.onlineshop.repository.ProductsRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class CategoriesService {
 
     private final CategoriesRepository categoriesRepository;
+    private final ProductsRepository productsRepository;
 
     @Autowired
     private Random random1; // imja peremennoj sovpalo imenem metoda Bean
@@ -115,8 +117,8 @@ public class CategoriesService {
     }
 
     public CategoryDto updateCategories(CategoryDto updCategory) { //update
-        CategoriesEntity createCategoryEntity = new CategoriesEntity(updCategory.getCategoryID(), updCategory.getName());
-        CategoriesEntity returnCategoryEntity = categoriesRepository.save(createCategoryEntity);
+        CategoriesEntity updateCategoryEntity = new CategoriesEntity(updCategory.getCategoryID(), updCategory.getName());
+        CategoriesEntity returnCategoryEntity = categoriesRepository.save(updateCategoryEntity);
        //transformiruem dannie is Entity v DTO i vosvraschaem polsovatelju
 
         return new CategoryDto(returnCategoryEntity.getCategoryId(), returnCategoryEntity.getName());

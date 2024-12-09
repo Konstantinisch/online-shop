@@ -4,12 +4,12 @@ import java.util.Objects;
 
 public class Cart {
     private long cartID;
-    private int userID;
+    private long userID;
 
     public Cart() {
     }
 
-    public Cart(long cartID, int userID) {
+    public Cart(long cartID, long userID) {
         this.cartID = cartID;
         this.userID = userID;
     }
@@ -22,11 +22,11 @@ public class Cart {
         this.cartID = cartID;
     }
 
-    public int getUserID() {
+    public long getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(long userID) {
         this.userID = userID;
     }
 

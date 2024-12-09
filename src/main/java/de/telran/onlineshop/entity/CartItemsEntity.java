@@ -18,12 +18,25 @@ public class CartItemsEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartItemsId;
 
-    @Column(name = "CartID")
-    private int cartId;
+//    @Column(name = "CartID")
+//    private int cartId;
 
-    @Column(name = "ProductID")
-    private int productId;
+//    @Column(name = "ProductID")
+//    private int productId;
 
     @Column(name = "Quantity")
     private int quantity;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "CartID")
+    private CartEntity cart;
+
+    @ManyToOne
+    @JoinColumn(name = "ProductID")
+    private ProductsEntity product;
+
+
+
 }

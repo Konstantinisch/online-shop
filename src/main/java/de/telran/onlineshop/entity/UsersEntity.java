@@ -1,23 +1,25 @@
 package de.telran.onlineshop.entity;
 
-//import de.telran.onlineshop.model.Orders;
+import de.telran.onlineshop.entity.enums.Role;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 @Entity
 @Table(name = "Users")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@EqualsAndHashCode
-@ToString
 public class UsersEntity {
-
     @Id
-    @Column(name = "UserID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "UserID")
     private Long userId;
 
     @Column(name = "Name")
@@ -32,5 +34,23 @@ public class UsersEntity {
     @Column(name = "PasswordHash")
     private String passwordHash;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Role")
+    private Role role;
 
+    @OneToOne(mappedBy = "user")
+    private CartEntity cart;
+
+    @OneToMany(mappedBy = "users")
+    private Set<OrdersEntity> ordersEntities = new HashSet<>();
+
+    public UsersEntity(Object o, String дуняСеменова, String mail, String number, String number1, Role role, CartEntity cart2, Object o1, Object o2) {
+    }
+
+
+//    @ManyToMany
+//    @JoinTable(name = "UsersAddresses",
+//            joinColumns = @JoinColumn(name = "UserID"),
+//            inverseJoinColumns = @JoinColumn(name = "AddressID"))
+//    private Set<AddressEntity> addresses =  new HashSet<>();
 }

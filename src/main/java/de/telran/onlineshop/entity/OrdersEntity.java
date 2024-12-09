@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Orders")
@@ -21,8 +23,8 @@ public class OrdersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @Column(name = "UserID")
-    private int userId;
+//    @Column(name = "UserID")
+//    private int userId;
 
     @Column(name = "CreatedAt")
     private Timestamp createdAt;
@@ -41,4 +43,19 @@ public class OrdersEntity {
 
     @Column(name = "UpdateAt")
     private Timestamp updatedAt;
+
+    @OneToMany(mappedBy = "orders")
+    private Set<OrderItemsEntity> orderItems = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "UserID")
+    private UsersEntity users;
+
+    public OrdersEntity(Object o, int i, Timestamp timestamp, String bananaStreet, int i1,
+                        String perCar, OrdersEnum ordersEnum, Timestamp timestamp1) {
+    }
+
+    public int getUserId() {
+        return getUserId();
+    }
 }

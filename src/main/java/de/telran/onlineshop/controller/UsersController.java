@@ -1,8 +1,8 @@
 package de.telran.onlineshop.controller;
 
-import de.telran.onlineshop.dto.CategoryDto;
 import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.service.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 public class UsersController {
+    @Autowired
     private UsersService usersService;
-
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
-    }
 
     @GetMapping  //select
     public ResponseEntity<List<UserDto>> getAllUsers() {
@@ -30,29 +27,11 @@ public class UsersController {
         return ResponseEntity.status(222).body(user);
     }
 
-    @GetMapping(value = "/get")
-    public UserDto getUserByName(@RequestParam String name) { ///categories/get?name=Other,k=2
-        return usersService.getUserByName(name);
-    }
-
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping //Jackson
-    public boolean createUsers(@RequestBody UserDto newUser) { //insert
-        return usersService.createUsers(newUser);
-    }
-
-    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public UserDto updateUsers(@RequestBody UserDto updUser) { //update
-        return usersService.updateUsers(updUser);
+    public ResponseEntity<UserDto> updateClient(@RequestBody UserDto user)  {
+        UserDto userResponse = usersService.updateUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
-
-    @DeleteMapping(value = "/{id}")
-    public void deleteUsers(@PathVariable Long id) { //delete
-        usersService.deleteUsers(id);
-    }
-
-
 
 
 

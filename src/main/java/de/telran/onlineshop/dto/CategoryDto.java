@@ -34,6 +34,7 @@ public class CategoryDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         CategoryDto category = (CategoryDto) o;
         return categoryID == category.categoryID && Objects.equals(name, category.name);
     }

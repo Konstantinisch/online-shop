@@ -20,11 +20,11 @@ public class CartController {
         this.cartService = cartService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Cart>> getCartList() {
-        List <Cart> carts = cartService.getCartList();
-        return new ResponseEntity<>(carts,HttpStatus.valueOf(200));
-    }
+//    @GetMapping
+//    public ResponseEntity<List<Cart>> getCartList() {
+//        List <Cart> carts = cartService.getCartList();
+//        return new ResponseEntity<>(carts,HttpStatus.valueOf(200));
+//    }
 
     @GetMapping(value = "/{id}")
     public Cart getCartByID(@PathVariable Integer id) {

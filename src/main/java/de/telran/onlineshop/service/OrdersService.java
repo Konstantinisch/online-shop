@@ -2,11 +2,9 @@ package de.telran.onlineshop.service;
 
 //import de.telran.onlineshop.model.Orders;
 
-import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.entity.OrdersEntity;
 import de.telran.onlineshop.dto.OrderDto;
 import de.telran.onlineshop.dto.OrdersEnum;
-import de.telran.onlineshop.entity.UsersEntity;
 import de.telran.onlineshop.repository.OrdersRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -37,14 +35,14 @@ public class OrdersService {
     public List<OrderDto> getAllOrders () {
         List<OrdersEntity> ordersEntities = ordersRepository.findAll();
         return ordersEntities.stream()
-                .map(entity -> new OrderDto(entity.getOrderId(), entity.getUserId(),entity.getCreatedAt(),
+                .map(entity -> new OrderDto(entity.getOrderId(),  entity.getUserId(),entity.getCreatedAt(),
                         entity.getDeliveryAddress(), entity.getContactPhone(), entity.getDeliveryMethod(),
                         entity.getStatus(), entity.getUpdatedAt()))
                 .collect(Collectors.toList());
     }
 
     public OrderDto getOrderById(Long id) {
-        OrdersEntity ordersEntity = ordersRepository.findById(Math.toIntExact(id)).orElse(new OrdersEntity());
+        OrdersEntity ordersEntity = ordersRepository.findById(id).orElse(new OrdersEntity());
         return new OrderDto(ordersEntity.getOrderId(), ordersEntity.getUserId(), ordersEntity.getCreatedAt(),
                 ordersEntity.getDeliveryAddress(), ordersEntity.getContactPhone(), ordersEntity.getDeliveryMethod(),
                 ordersEntity.getStatus(), ordersEntity.getUpdatedAt());
@@ -76,7 +74,7 @@ public class OrdersService {
     public void deleteOrders( Long id) { //delete
         //categoriesRepository.deleteById(id); // first variant realisazii menee informativno
 
-        OrdersEntity orders = ordersRepository.findById(Math.toIntExact(id)).orElse(null);
+        OrdersEntity orders = ordersRepository.findById(id).orElse(null);
         if (orders == null) {
             throw new RuntimeException("Net takogo objecta s id =" + id);
         } else {

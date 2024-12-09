@@ -20,10 +20,10 @@ public class CartItemsController {
 
 
 
-    @GetMapping
-    public List<CartItems> getAllCartItems() {
-        return cartItemsService.getAllCartItems();
-    }
+//    @GetMapping
+//    public List<CartItems> getAllCartItems() {
+//        return cartItemsService.getAllCartItems();
+//    }
 
 //    @GetMapping(value = "/{id}")
 //    CartItems getCartItemsByID(@PathVariable int id) {

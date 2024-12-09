@@ -1,23 +1,42 @@
 package de.telran.onlineshop.entity;
 
+import de.telran.onlineshop.dto.CartItems;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Data
 @Entity
-@Table(name = "Cart")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@Builder
+@Table(name = "Cart")
 public class CartEntity {
-
     @Id
-    @Column(name = "CartID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "CartID")
     private Long cartId;
 
-    @Column(name = "UserID")
-    private int userId;
+
+    @OneToOne
+    @JoinColumn(name = "UserID", referencedColumnName = "userId")
+    private UsersEntity user;
+
+
+    @OneToMany(mappedBy = "cart")
+    private Set<CartItemsEntity> cartItems = new HashSet<>();
+
+    public CartEntity(Object o, Object o1) {
+    }
+
+
+    public long getCartId() {
+        return cartId;
+    }
+
+
 }

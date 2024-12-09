@@ -2,6 +2,8 @@ package de.telran.onlineshop.service;
 
 import de.telran.onlineshop.entity.CartEntity;
 import de.telran.onlineshop.dto.Cart;
+import de.telran.onlineshop.entity.UsersEntity;
+import de.telran.onlineshop.repository.CartItemsRepository;
 import de.telran.onlineshop.repository.CartRepository;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -20,18 +22,19 @@ public class CartService {
     private List<Cart> cartList;
 
     private final CartRepository cartRepository;
+    private final CartItemsRepository cartItemsRepository;
 
     @PostConstruct
     void init() {
-        CartEntity cart1 = new CartEntity(null,4);
+        CartEntity cart1 = new CartEntity(null, null);
         cartRepository.save(cart1);
-        CartEntity cart2 = new CartEntity(null, 3);
+        CartEntity cart2 = new CartEntity(null, null);
         cartRepository.save(cart2);
-        CartEntity cart3 = new CartEntity(null, 2);
+        CartEntity cart3 = new CartEntity(null, null);
         cartRepository.save(cart3);
-        CartEntity cart4 = new CartEntity(null,1);
+        CartEntity cart4 = new CartEntity(null,null);
         cartRepository.save(cart4);
-        CartEntity cart5 = new CartEntity(null, 7);
+        CartEntity cart5 = new CartEntity(null, null);
         cartRepository.save(cart5);
 
 
@@ -40,12 +43,12 @@ public class CartService {
         System.out.println("This object is created " + this.getClass().getName());
     }
 
-    public List<Cart> getCartList() {
-        List<CartEntity> cartEntities = cartRepository.findAll();
-        return cartEntities.stream()
-                .map(entity -> new Cart(entity.getCartId(), entity.getUserId()))
-                .collect(Collectors.toList());
-    }
+//    public List<Cart> getCartList() {
+//        List<CartEntity> cartEntities = cartRepository.findAll();
+//        return cartEntities.stream()
+//                .map(entity -> new Cart(entity.getCartId(), entity.getUserId()))
+//                .collect(Collectors.toList());
+//    }
 
     public Cart getCartByID(@PathVariable Integer id) {
         return cartList.stream()
