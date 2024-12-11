@@ -1,7 +1,7 @@
 package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.service.CartService;
-import de.telran.onlineshop.dto.Cart;
+import de.telran.onlineshop.dto.CartDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,27 +20,27 @@ public class CartController {
         this.cartService = cartService;
     }
 
-//    @GetMapping
-//    public ResponseEntity<List<Cart>> getCartList() {
-//        List <Cart> carts = cartService.getCartList();
-//        return new ResponseEntity<>(carts,HttpStatus.valueOf(200));
-//    }
+    @GetMapping
+    public ResponseEntity<List<CartDto>> getCartList() {
+        List<CartDto> carts = cartService.cartList;
+        return new ResponseEntity<>(carts,HttpStatus.valueOf(200));
+    }
 
     @GetMapping(value = "/{id}")
-    public Cart getCartByID(@PathVariable Integer id) {
+    public CartDto getCartByID(@PathVariable Integer id) {
         return cartService.getCartByID(id);
 
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/add")
-    public Cart createCart(@RequestBody Cart newCart) {
+    public CartDto createCart(@RequestBody CartDto newCart) {
         return cartService.createCart(newCart);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public Cart updateCart(@RequestBody Cart currentCart) {
+    public CartDto updateCart(@RequestBody CartDto currentCart) {
         return cartService.updateCart(currentCart);
     }
 

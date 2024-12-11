@@ -1,5 +1,6 @@
 package de.telran.onlineshop.service;
 
+import de.telran.onlineshop.entity.CategoriesEntity;
 import de.telran.onlineshop.entity.OrderItemsEntity;
 import de.telran.onlineshop.entity.ProductsEntity;
 import de.telran.onlineshop.repository.OrderItemsRepository;
@@ -22,7 +23,7 @@ public class OrderItemsService {
     void init () {
 
         ProductsEntity products1 = new ProductsEntity(null,"Pulver","Weiss",3.4,
-                "http/www.",4.7, Timestamp.valueOf(LocalDateTime.now()),null,null,null );
+                "http/www.",4.7, Timestamp.valueOf(LocalDateTime.now()),null,new CategoriesEntity(null,"Milch"),null );
         products1 = productsRepository.save(products1);
         OrderItemsEntity orderItems1 = new OrderItemsEntity(3, 6, 4,
                 777,products1 );

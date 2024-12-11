@@ -2,14 +2,14 @@ package de.telran.onlineshop.dto;
 
 import java.util.Objects;
 
-public class Cart {
+public class CartDto {
     private long cartID;
     private long userID;
 
-    public Cart() {
+    public CartDto() {
     }
 
-    public Cart(long cartID, long userID) {
+    public CartDto(long cartID, long userID) {
         this.cartID = cartID;
         this.userID = userID;
     }
@@ -34,7 +34,7 @@ public class Cart {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cart cart = (Cart) o;
+        CartDto cart = (CartDto) o;
         return cartID == cart.cartID && userID == cart.userID;
     }
 
