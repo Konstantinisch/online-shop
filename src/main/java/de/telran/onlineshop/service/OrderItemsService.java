@@ -19,7 +19,7 @@ public class OrderItemsService {
     private final OrderItemsRepository orderItemsRepository;
     private final ProductsRepository productsRepository;
 
-    @PostConstruct
+    //@PostConstruct
     void init () {
 
         ProductsEntity products1 = new ProductsEntity(null,"Pulver","Weiss",3.4,

@@ -21,7 +21,7 @@ public class CartItemsService {
     private final CartRepository cartRepository;
     private final ProductsRepository productsRepository;
 
-    @PostConstruct
+   // @PostConstruct
     void init() {
 
         ProductsEntity product1 = new ProductsEntity();

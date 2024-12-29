@@ -1,13 +1,25 @@
 package de.telran.onlineshop.dto;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import de.telran.onlineshop.entity.FavoritesEntity;
+import de.telran.onlineshop.entity.OrdersEntity;
 
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
     private Long userID;
     private String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)// esli ravno null - skrit v vivode
     private String email;
     private String phoneNumber;
     private String passwordHash;
+
+    private Set<FavoritesDto> favorites = new HashSet<>();
+
+
 
     public UserDto(Long userID, String name, String email, String phoneNumber, String passwordHash) {
         this.userID = userID;
@@ -15,6 +27,17 @@ public class UserDto {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.passwordHash = passwordHash;
+    }
+
+    public UserDto() {
+    }
+
+    public Set<FavoritesDto> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(Set<FavoritesDto> favorites) {
+        this.favorites = favorites;
     }
 
     public Long getUserID() {

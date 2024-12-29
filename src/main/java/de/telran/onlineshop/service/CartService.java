@@ -24,7 +24,7 @@ public class CartService {
     private final CartRepository cartRepository;
     private final CartItemsRepository cartItemsRepository;
 
-    @PostConstruct
+   // @PostConstruct
     void init() {
         cartList.add(new CartDto(1, 3));
 

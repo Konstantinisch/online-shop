@@ -20,7 +20,7 @@ public class OrdersService {
 
     private final OrdersRepository ordersRepository;
 
-    @PostConstruct
+    //@PostConstruct
     void init() {
         OrdersEntity ordersEntity1 = new OrdersEntity(null, 2, new Timestamp(System.currentTimeMillis()),
                 "Fish street", 4917, "per Car",

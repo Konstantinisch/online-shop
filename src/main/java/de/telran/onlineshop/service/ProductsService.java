@@ -27,7 +27,7 @@ public class ProductsService {
 
 
 
-    @PostConstruct
+    //@PostConstruct
     void init() {
 //        //Создание продукта и создание категории
 //        CategoriesEntity category1 = new CategoriesEntity(null,"Молочные Продукты");
