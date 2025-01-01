@@ -1,6 +1,5 @@
 package de.telran.onlineshop.entity;
 
-import de.telran.onlineshop.dto.CartItems;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
-@Table(name = "Cart")
+@Table(name = "Carts")
 public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

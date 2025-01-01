@@ -19,7 +19,7 @@ public class UserDto {
 
     private Set<FavoritesDto> favorites = new HashSet<>();
 
-
+    private CartDto cart;
 
     public UserDto(Long userID, String name, String email, String phoneNumber, String passwordHash) {
         this.userID = userID;

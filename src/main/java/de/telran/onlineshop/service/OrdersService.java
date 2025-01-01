@@ -3,10 +3,9 @@ package de.telran.onlineshop.service;
 //import de.telran.onlineshop.model.Orders;
 
 import de.telran.onlineshop.entity.OrdersEntity;
-import de.telran.onlineshop.dto.OrderDto;
+import de.telran.onlineshop.dto.OrdersDto;
 import de.telran.onlineshop.dto.OrdersEnum;
 import de.telran.onlineshop.repository.OrdersRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,24 +31,24 @@ public class OrdersService {
         ordersRepository.save(ordersEntity2);
     }
 
-    public List<OrderDto> getAllOrders () {
+    public List<OrdersDto> getAllOrders () {
         List<OrdersEntity> ordersEntities = ordersRepository.findAll();
         return ordersEntities.stream()
-                .map(entity -> new OrderDto(entity.getOrderId(),  entity.getUserId(),entity.getCreatedAt(),
+                .map(entity -> new OrdersDto(entity.getOrderId(),  entity.getUserId(),entity.getCreatedAt(),
                         entity.getDeliveryAddress(), entity.getContactPhone(), entity.getDeliveryMethod(),
                         entity.getStatus(), entity.getUpdatedAt()))
                 .collect(Collectors.toList());
     }
 
-    public OrderDto getOrderById(Long id) {
+    public OrdersDto getOrderById(Long id) {
         OrdersEntity ordersEntity = ordersRepository.findById(id).orElse(new OrdersEntity());
-        return new OrderDto(ordersEntity.getOrderId(), ordersEntity.getUserId(), ordersEntity.getCreatedAt(),
+        return new OrdersDto(ordersEntity.getOrderId(), ordersEntity.getUserId(), ordersEntity.getCreatedAt(),
                 ordersEntity.getDeliveryAddress(), ordersEntity.getContactPhone(), ordersEntity.getDeliveryMethod(),
                 ordersEntity.getStatus(), ordersEntity.getUpdatedAt());
     }
 
 
-    public boolean createOrders( OrderDto newOrder) { //insert
+    public boolean createOrders( OrdersDto newOrder) { //insert
         OrdersEntity createOrderEntity = new OrdersEntity(null, newOrder.getUserID(), newOrder.getCreatedAt(),
                 newOrder.getDeliveryAddress(), newOrder.getContactPhone(), newOrder.getDeliveryMethod(),
                 newOrder.getStatus(), newOrder.getUpdatedAt());
@@ -59,14 +58,14 @@ public class OrdersService {
         return createOrderEntity.getOrderId() != null;
     }
 
-    public OrderDto updateOrders(OrderDto updOrder) { //update
+    public OrdersDto updateOrders(OrdersDto updOrder) { //update
         OrdersEntity createOrderEntity = new OrdersEntity(null, updOrder.getUserID(), updOrder.getCreatedAt(),
                 updOrder.getDeliveryAddress(), updOrder.getContactPhone(), updOrder.getDeliveryMethod(),
                 updOrder.getStatus(), updOrder.getUpdatedAt());
         OrdersEntity returnOrderEntity = ordersRepository.save(createOrderEntity);
         //transformiruem dannie is Entity v DTO i vosvraschaem polsovatelju
 
-        return new OrderDto(returnOrderEntity.getOrderId(), returnOrderEntity.getUserId(), returnOrderEntity.getCreatedAt(),
+        return new OrdersDto(returnOrderEntity.getOrderId(), returnOrderEntity.getUserId(), returnOrderEntity.getCreatedAt(),
                 returnOrderEntity.getDeliveryAddress(), returnOrderEntity.getContactPhone(), returnOrderEntity.getDeliveryMethod(),
                 returnOrderEntity.getStatus(), returnOrderEntity.getUpdatedAt());
     }

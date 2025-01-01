@@ -41,6 +41,9 @@ public class UsersEntity {
     @OneToOne(mappedBy = "user")
     private CartEntity cart;
 
+    @OneToMany(mappedBy = "user")
+    private Set<FavoritesEntity> favorites = new HashSet<>();
+
     @OneToMany(mappedBy = "users")
     private Set<OrdersEntity> ordersEntities = new HashSet<>();
 

@@ -1,6 +1,6 @@
 package de.telran.onlineshop.controller;
 
-import de.telran.onlineshop.dto.CartItems;
+import de.telran.onlineshop.dto.CartItemsDto;
 import de.telran.onlineshop.service.CartItemsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @RequestMapping(value = "/cartItems")
 public class CartItemsController {
 
-    private List<CartItems> cartItemsList;
+    private List<CartItemsDto> cartItemsList;
 
     private CartItemsService cartItemsService;
 

@@ -1,7 +1,7 @@
 package de.telran.onlineshop.controller;
 
 //import de.telran.onlineshop.model.Orders;
-import de.telran.onlineshop.dto.OrderDto;
+import de.telran.onlineshop.dto.OrdersDto;
 import de.telran.onlineshop.service.OrdersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,27 +21,27 @@ public class OrdersController {
 
 
     @GetMapping
-    public List<OrderDto> getAllOrders () {
+    public List<OrdersDto> getAllOrders () {
         return ordersService.getAllOrders();
     }
 
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<OrderDto> getOrderById(@PathVariable Long id) {
-        OrderDto order = ordersService.getOrderById(id);
+    public ResponseEntity<OrdersDto> getOrderById(@PathVariable Long id) {
+        OrdersDto order = ordersService.getOrderById(id);
         return ResponseEntity.status(222).body(order);
     }
 
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping //Jackson
-    public boolean createOrders(@RequestBody OrderDto newOrder) { //insert
+    public boolean createOrders(@RequestBody OrdersDto newOrder) { //insert
         return ordersService.createOrders(newOrder);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public OrderDto updateOrder(@RequestBody OrderDto updOrder) { //update
+    public OrdersDto updateOrder(@RequestBody OrdersDto updOrder) { //update
         return ordersService.updateOrders(updOrder);
     }
 

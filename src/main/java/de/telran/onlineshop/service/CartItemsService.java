@@ -2,17 +2,12 @@ package de.telran.onlineshop.service;
 
 import de.telran.onlineshop.entity.CartEntity;
 import de.telran.onlineshop.entity.CartItemsEntity;
-import de.telran.onlineshop.dto.CartItems;
 import de.telran.onlineshop.entity.ProductsEntity;
 import de.telran.onlineshop.repository.CartItemsRepository;
 import de.telran.onlineshop.repository.CartRepository;
 import de.telran.onlineshop.repository.ProductsRepository;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

@@ -3,7 +3,7 @@ package de.telran.onlineshop.dto;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class OrderDto {
+public class OrdersDto {
     private Long orderId;
     private int userId;
     private Timestamp createdAt;
@@ -13,11 +13,11 @@ public class OrderDto {
     private OrdersEnum status;
     private Timestamp updatedAt;
 
-    public OrderDto() {
+    public OrdersDto() {
     }
 
-    public OrderDto(Long orderID, int userID, Timestamp createdAt, String deliveryAddress,
-                    int contactPhone, String deliveryMethod, OrdersEnum status, Timestamp updatedAt) {
+    public OrdersDto(Long orderID, int userID, Timestamp createdAt, String deliveryAddress,
+                     int contactPhone, String deliveryMethod, OrdersEnum status, Timestamp updatedAt) {
         this.orderId = orderID;
         this.userId = userID;
         this.createdAt = createdAt;
@@ -96,7 +96,7 @@ public class OrderDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderDto orders = (OrderDto) o;
+        OrdersDto orders = (OrdersDto) o;
         return orderId == orders.orderId && userId == orders.userId && contactPhone == orders.contactPhone && Objects.equals(createdAt, orders.createdAt) && Objects.equals(deliveryAddress, orders.deliveryAddress) && Objects.equals(deliveryMethod, orders.deliveryMethod) && Objects.equals(status, orders.status) && Objects.equals(updatedAt, orders.updatedAt);
     }
 
