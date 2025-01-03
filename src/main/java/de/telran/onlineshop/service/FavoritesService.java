@@ -3,7 +3,8 @@ package de.telran.onlineshop.service;
 import de.telran.onlineshop.configure.MapperUtil;
 import de.telran.onlineshop.dto.FavoritesDto;
 import de.telran.onlineshop.entity.FavoritesEntity;
-import de.telran.onlineshop.mapper.Mappers;
+import de.telran.onlineshop.mapper.FavoritesMapper;
+//import de.telran.onlineshop.mapper.Mappers;
 import de.telran.onlineshop.repository.FavoritesRepository;
 import de.telran.onlineshop.repository.ProductsRepository;
 import de.telran.onlineshop.repository.UsersRepository;
@@ -19,7 +20,7 @@ public class FavoritesService {
     private final FavoritesRepository favoritesRepository;
     private final ProductsRepository productsRepository;
     private final UsersRepository usersRepository;
-    private final Mappers mappers;
+    private final FavoritesMapper mappers;
 
     public List<FavoritesDto> getAllFavorites() {
         List<FavoritesEntity> favoritesEntitiesList = favoritesRepository.findAll();

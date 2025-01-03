@@ -1,10 +1,15 @@
 package de.telran.onlineshop.dto;
 
 import java.util.Objects;
+import java.util.Set;
 
 public class CartDto {
     private long cartID;
     private long userID;
+
+    private Set<CartItemsDto> cartItems;
+
+    private UserDto user;
 
     public CartDto() {
     }
@@ -28,6 +33,22 @@ public class CartDto {
 
     public void setUserID(long userID) {
         this.userID = userID;
+    }
+
+    public void setCartItems(Set<CartItemsDto> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public Set<CartItemsDto> getCartItems() {
+        return cartItems;
+    }
+
+    public UserDto getUser() {
+        return user;
+    }
+
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     @Override

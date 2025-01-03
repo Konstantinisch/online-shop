@@ -6,7 +6,8 @@ import de.telran.onlineshop.entity.CartEntity;
 import de.telran.onlineshop.entity.FavoritesEntity;
 import de.telran.onlineshop.entity.UsersEntity;
 import de.telran.onlineshop.entity.enums.Role;
-import de.telran.onlineshop.mapper.Mappers;
+//import de.telran.onlineshop.mapper.Mappers;
+import de.telran.onlineshop.mapper.UserMapper;
 import de.telran.onlineshop.repository.CartRepository;
 import de.telran.onlineshop.repository.UsersRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,8 @@ class UsersServiceTest {
     private CartRepository cartRepositoryMock;
 
     @Mock
-    private Mappers mappersMock;
+//    private Mappers mappersMock;
+    private UserMapper mappersMock;
 
     @InjectMocks
     private UsersService usersServiceTest;//object for testing - unit object

@@ -6,19 +6,25 @@ import de.telran.onlineshop.dto.FavoritesDto;
 import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.entity.UsersEntity;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserMapper {
 
     private final ModelMapper modelMapper;
+
+//    @Lazy
     private final CartMapper cartMapper;
+
+    private final FavoritesMapper favoritesMapper;
 
     public UserDto convertToUserDto(UsersEntity usersEntity) {
         modelMapper.typeMap(UsersEntity.class, UserDto.class)
@@ -27,13 +33,21 @@ public class UserMapper {
         if (userDto.getPasswordHash() != null)
             userDto.setPasswordHash("***");
 
-        if (usersEntity.getFavorites()!=null) {
-            Set<FavoritesDto> favoritesDtoSet = MapperUtil.convertSet(usersEntity.getFavorites(), this::convertToFavoritesDto);
-            userDto.setFavorites(favoritesDtoSet);
-        }
-
-        CartDto cartDto = cartMapper.convertToCartDto(usersEntity.getCart()); // второй связанный объект
-        userDto.setCart(cartDto);
+//        if (usersEntity.getFavorites()!=null) {
+//            Set<FavoritesDto> favoritesDtoSet = MapperUtil.convertSet(usersEntity.getFavorites(), favoritesMapper::convertToFavoritesDto);
+//            userDto.setFavorites(favoritesDtoSet);
+//        }
+//
+//        CartDto cartDto = cartMapper.convertToCartDto(usersEntity.getCart()); // второй связанный объект
+//        userDto.setCart(cartDto);
         return userDto;
     }
+
+    public UsersEntity convertToUserEntity(UserDto userDto) {
+        UsersEntity usersEntity = modelMapper.map(userDto, UsersEntity.class); //автомат
+        return usersEntity;
+    }
+
+
+
 }

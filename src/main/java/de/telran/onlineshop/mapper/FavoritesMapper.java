@@ -3,11 +3,12 @@ package de.telran.onlineshop.mapper;
 import de.telran.onlineshop.dto.FavoritesDto;
 import de.telran.onlineshop.entity.FavoritesEntity;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class FavoritesMapper {
 
     private final ModelMapper modelMapper;

@@ -5,7 +5,8 @@ import de.telran.onlineshop.dto.CartItemsDto;
 import de.telran.onlineshop.entity.CartEntity;
 import de.telran.onlineshop.entity.CartItemsEntity;
 import de.telran.onlineshop.entity.ProductsEntity;
-import de.telran.onlineshop.mapper.Mappers;
+import de.telran.onlineshop.mapper.CartItemsMapper;
+//import de.telran.onlineshop.mapper.Mappers;
 import de.telran.onlineshop.repository.CartItemsRepository;
 import de.telran.onlineshop.repository.CartRepository;
 import de.telran.onlineshop.repository.ProductsRepository;
@@ -20,7 +21,7 @@ public class CartItemsService {
     private final CartItemsRepository cartItemsRepository;
     private final CartRepository cartRepository;
     private final ProductsRepository productsRepository;
-    private final Mappers mappers;
+    private final CartItemsMapper mappers;
 
     // @PostConstruct
     void init() {

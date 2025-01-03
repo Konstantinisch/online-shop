@@ -58,4 +58,10 @@ public class OrdersEntity {
     public int getUserId() {
         return getUserId();
     }
+
+    public void setUsers(UsersEntity users) {
+        this.users = users;
+    }
+
+
 }
