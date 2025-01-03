@@ -2,21 +2,49 @@ package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.dto.CartItemsDto;
 import de.telran.onlineshop.service.CartItemsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cartItems")
+@RequiredArgsConstructor
 public class CartItemsController {
 
-    private List<CartItemsDto> cartItemsList;
+//    private List<CartItemsDto> cartItemsList;
 
-    private CartItemsService cartItemsService;
+    private final CartItemsService cartItemsService;
 
-    public CartItemsController(CartItemsService cartItemsService) {
-        this.cartItemsService = cartItemsService;
+    @GetMapping
+    public List<CartItemsDto> getAllCartItems() {
+       return cartItemsService.getAllCartItems();
     }
+
+    @GetMapping(value = "/{id}")
+    public CartItemsDto getCartItemsById(@PathVariable Long id) {
+        return cartItemsService.getCartItemsById(id);
+    }
+
+    @PutMapping
+    public CartItemsDto updateCartItems(@RequestBody CartItemsDto cartItem) {
+        return cartItemsService.updateCartItems(cartItem);
+    }
+
+    @PostMapping
+    public CartItemsDto insertCartItems(@RequestBody CartItemsDto cartItem) {
+        return cartItemsService.insertCartItems(cartItem);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteCartItemsById(@PathVariable Long id) {
+        cartItemsService.deleteCartItemsById(id);
+    }
+
+
+//    public CartItemsController(CartItemsService cartItemsService) {
+//        this.cartItemsService = cartItemsService;
+//    }
 
 
 

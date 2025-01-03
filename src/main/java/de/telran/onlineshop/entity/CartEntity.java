@@ -1,5 +1,6 @@
 package de.telran.onlineshop.entity;
 
+import de.telran.onlineshop.configure.MapperUtil;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class CartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CartID")
     private Long cartId;
+
 
 
     @OneToOne

@@ -27,13 +27,13 @@ public class Mappers {
             userDto.setPasswordHash("***"); // замещаем данных
 
         // преобразовываем
-//        if (usersEntity.getFavorites()!=null) {
-//            Set<FavoritesDto> favoritesDtoSet = MapperUtil.convertSet(usersEntity.getFavorites(), this::convertToFavoritesDto);
-//            userDto.setFavorites(favoritesDtoSet);
-//        }
-//
-//        CartDto cartDto = convertToCartDto(usersEntity.getCart()); // второй связанный объект
-//        userDto.setCart(cartDto);
+        if (usersEntity.getFavorites()!=null) {
+            Set<FavoritesDto> favoritesDtoSet = MapperUtil.convertSet(usersEntity.getFavorites(), this::convertToFavoritesDto);
+            userDto.setFavorites(favoritesDtoSet);
+        }
+
+        CartDto cartDto = convertToCartDto(usersEntity.getCart()); // второй связанный объект
+        userDto.setCart(cartDto);
         return userDto;
     }
 
@@ -44,10 +44,20 @@ public class Mappers {
         return cartDto;
     }
 
+    public CartEntity convertToCartEntity(CartDto cartDto) {
+        CartEntity cartEntity = modelMapper.map(cartDto, CartEntity.class);
+        return cartEntity;
+    }
+
     public FavoritesDto convertToFavoritesDto(FavoritesEntity favoritesEntity) {
         FavoritesDto favoritesDto = modelMapper.map(favoritesEntity, FavoritesDto.class); //автомат
         favoritesDto.setUser(null);
         return favoritesDto;
+    }
+
+    public FavoritesEntity convertToFavoritesEntity(FavoritesDto favoritesDto) {
+        FavoritesEntity favoritesEntity = modelMapper.map(favoritesDto, FavoritesEntity.class);
+        return favoritesEntity;
     }
 
     public UsersEntity convertToUserEntity(UserDto userDto) {

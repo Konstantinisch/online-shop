@@ -32,6 +32,14 @@ public class UserDto {
     public UserDto() {
     }
 
+    public CartDto getCart() {
+        return cart;
+    }
+
+    public void setCart(CartDto cart) {
+        this.cart = cart;
+    }
+
     public Set<FavoritesDto> getFavorites() {
         return favorites;
     }

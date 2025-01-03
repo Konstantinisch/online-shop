@@ -20,7 +20,7 @@ public class MapperUtil {
         return list.stream().map(e -> converter.apply(e)).collect(Collectors.toList());
     }
 
-    public static <R, E> Set<R> convertSet(List<E> set, Function<E, R> converter) {
+    public static <R, E> Set<R> convertSet(Set<E> set, Function<E, R> converter) {
         return set.stream().map(e -> converter.apply(e)).collect(Collectors.toSet());
     }
 }

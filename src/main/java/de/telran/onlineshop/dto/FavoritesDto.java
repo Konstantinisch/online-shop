@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class FavoritesDto {
-    private long favoriteId;
+    private Long favoriteId;
     private UserDto user;
     private ProductsDto product;
 }

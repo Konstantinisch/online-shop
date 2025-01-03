@@ -23,7 +23,7 @@ public class UsersService {
     private final CartRepository cartRepository;
     private final Mappers mappers;
 
-    private List<UserDto> userList;
+//    private List<UserDto> userList;
 
 
     //@PostConstruct
@@ -91,7 +91,7 @@ public class UsersService {
     }
 
     public void deleteUsersById(Long id) {
-        UsersEntity usersEntity = usersRepository.findById(id).orElse(null);
+        UsersEntity usersEntity = usersRepository.findById(id).orElse(new UsersEntity());
         if (usersEntity != null) {
             usersRepository.delete(usersEntity);
         }

@@ -16,7 +16,7 @@ public class FavoritesEntity {
     @Id
     @Column(name = "FavoriteID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long favoriteId;
+    private Long favoriteId;
 
 //    @Column(name = "UserID")
 //    private long userId;
