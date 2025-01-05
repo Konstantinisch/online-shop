@@ -16,7 +16,7 @@ public class OrderItemsEntity {
     @Id
     @Column(name = "OrderItemsID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long orderItemsId;
+    private Long orderItemsId;
 
 //    @Column(name = "OrderID")
 //    private long orderId;

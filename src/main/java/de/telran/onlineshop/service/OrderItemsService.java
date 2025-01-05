@@ -53,4 +53,20 @@ public class OrderItemsService {
         OrderItemsEntity returnOrderItems = orderItemsRepository.save(orderItemsEntity);
         return mappers.converToOrderItemsDto(returnOrderItems);
     }
+
+    public OrderItemsDto insertOrderItems(OrderItemsDto orderItemsDto) {
+        OrderItemsEntity orderItemsEntity = mappers.convertToOrderItemsEntity(orderItemsDto);
+        orderItemsEntity.setOrderItemsId(null);
+        OrderItemsEntity savedOrderItemsEntity = orderItemsRepository.save(orderItemsEntity);
+        return mappers.converToOrderItemsDto(savedOrderItemsEntity);
+    }
+
+    public void deleteOrderItems(Long id) {
+        OrderItemsEntity orderItemsEntity = orderItemsRepository.findById(id).orElse(new OrderItemsEntity());
+        if (orderItemsEntity == null) {
+            throw new RuntimeException("This object doesn't exist");
+        } else {
+            orderItemsRepository.delete(orderItemsEntity);
+        }
+    }
 }

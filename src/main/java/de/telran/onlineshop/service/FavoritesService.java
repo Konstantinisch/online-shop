@@ -52,7 +52,7 @@ public class FavoritesService {
     public void deleteFavorites(Long id) {
         FavoritesEntity favoritesEntity = favoritesRepository.findById(id).orElse(new FavoritesEntity());
         if (favoritesEntity == null) {
-            throw new RuntimeException("not exist");
+            throw new RuntimeException("does not exist");
         } else {
             favoritesRepository.delete(favoritesEntity);
         }

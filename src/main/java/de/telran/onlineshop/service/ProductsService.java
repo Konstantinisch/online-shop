@@ -1,10 +1,12 @@
 package de.telran.onlineshop.service;
 
 
+import de.telran.onlineshop.configure.MapperUtil;
 import de.telran.onlineshop.dto.CategoryDto;
 import de.telran.onlineshop.dto.ProductsDto;
 import de.telran.onlineshop.entity.CategoriesEntity;
 import de.telran.onlineshop.entity.ProductsEntity;
+import de.telran.onlineshop.mapper.Mappers;
 import de.telran.onlineshop.repository.CategoriesRepository;
 import de.telran.onlineshop.repository.ProductsRepository;
 import jakarta.annotation.PostConstruct;
@@ -24,7 +26,7 @@ public class ProductsService {
     private static final Logger log = LoggerFactory.getLogger(ProductsService.class);
     private final ProductsRepository productsRepository;
     private final CategoriesRepository categoriesRepository;
-
+    private final Mappers mappers;
 
 
     //@PostConstruct
@@ -49,24 +51,57 @@ public class ProductsService {
         CategoriesEntity category3 = categoriesRepository.findByName("Продукты");
         ProductsEntity product3 = new ProductsEntity(null, "Молоко", "Безлактозное", 1.89,
                 "https://s0.rbk.ru/v6_top_pics/resized/600xH/media/img/0/78/756801770042780.webp",
-                0.15, Timestamp.valueOf(LocalDateTime.now()), null, category3,null);
+                0.15, Timestamp.valueOf(LocalDateTime.now()), null, category3, null);
         product3 = productsRepository.save(product3);
 
         //Создание продукта и используем существующую категорию
         ProductsEntity product4 = new ProductsEntity(null, "Сливки", "Безлактозное", 5.89,
                 "https://s0.rbk.ru/v6_top_pics/resized/600xH/media/img/0/78/756801770042780.webp",
-                0.15, Timestamp.valueOf(LocalDateTime.now()), null, category3,null);
+                0.15, Timestamp.valueOf(LocalDateTime.now()), null, category3, null);
         product4 = productsRepository.save(product4);
     }
 
 
     public List<ProductsDto> getAllProducts() {
-        List<ProductsEntity> productsEntities = productsRepository.findAll();
-        return productsEntities.stream()
-                .map(entity -> ProductsDto.builder()
-                        .productId(entity.getProductId())
-                        .name(entity.getName())
-                        .build())
-                .collect(Collectors.toList());
+        List<ProductsEntity> productsEntityList = productsRepository.findAll();
+        List<ProductsDto> productsDtoList = MapperUtil.convertList(productsEntityList, mappers::convertToProductsDto);
+        return productsDtoList;
     }
+
+    public ProductsDto getProductById(Long id) {
+        ProductsEntity productsEntity = productsRepository.findById(id).orElse(new ProductsEntity());
+        return mappers.convertToProductsDto(productsEntity);
+    }
+
+    public ProductsDto updateProduct(ProductsDto productDto) {
+        ProductsEntity productsEntity = mappers.convertToProductsEntity(productDto);
+        ProductsEntity returnProductsEntity = productsRepository.save(productsEntity);
+        return mappers.convertToProductsDto(returnProductsEntity);
+    }
+
+    public ProductsDto insertProduct(ProductsDto productsDto) {
+        ProductsEntity productsEntity = mappers.convertToProductsEntity(productsDto);
+        productsEntity.setProductId(null);
+        ProductsEntity savedProductEntity = productsRepository.save(productsEntity);
+        return mappers.convertToProductsDto(savedProductEntity);
+    }
+
+    public void deleteProduct(Long id) {
+        ProductsEntity productsEntity = productsRepository.findById(id).orElse(new ProductsEntity());
+        if (productsEntity == null) {
+            throw new RuntimeException("not found");
+        } else {
+            productsRepository.delete(productsEntity);
+        }
+    }
+
+//    public List<ProductsDto> getAllProducts() {
+//        List<ProductsEntity> productsEntities = productsRepository.findAll();
+//        return productsEntities.stream()
+//                .map(entity -> ProductsDto.builder()
+//                        .productId(entity.getProductId())
+//                        .name(entity.getName())
+//                        .build())
+//                .collect(Collectors.toList());
+//    }
 }

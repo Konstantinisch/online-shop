@@ -4,10 +4,7 @@ import de.telran.onlineshop.dto.ProductsDto;
 import de.telran.onlineshop.service.ProductsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +17,31 @@ public class ProductsController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<ProductsDto> getAllProducts () {
+    public List<ProductsDto> getAllProducts() {
         return productsService.getAllProducts();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(value = "/{id}")
+    public ProductsDto getProductById(@PathVariable Long id) {
+        return productsService.getProductById(id);
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    public ProductsDto updateProduct(@RequestBody ProductsDto productsDto) {
+       return productsService.updateProduct(productsDto);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping
+    public ProductsDto insertProduct(@RequestBody ProductsDto productsDto) {
+       return productsService.insertProduct(productsDto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productsService.deleteProduct(id);
     }
 
 }

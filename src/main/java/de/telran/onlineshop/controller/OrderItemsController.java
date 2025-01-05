@@ -29,4 +29,14 @@ public class OrderItemsController {
     public OrderItemsDto updateOrderItems(@RequestBody OrderItemsDto orderItemsDto) {
         return orderItemsService.updateOrderItems(orderItemsDto);
     }
+
+    @PutMapping
+    public OrderItemsDto insertOrderItems(@RequestBody OrderItemsDto orderItemsDto) {
+        return orderItemsService.insertOrderItems(orderItemsDto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void deleteOrderItems(@PathVariable Long id) {
+        orderItemsService.deleteOrderItems(id);
+    }
 }
