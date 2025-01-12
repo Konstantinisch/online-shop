@@ -1,6 +1,7 @@
 package de.telran.onlineshop.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.HashSet;
@@ -22,6 +23,7 @@ public class CategoriesEntity {
     private Long categoryId;
 
     @Column(name = "Name")
+    @NotBlank //moyet bit
     private String name;
 
     @OneToMany(mappedBy = "category")

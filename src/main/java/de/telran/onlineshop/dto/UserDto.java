@@ -3,6 +3,7 @@ package de.telran.onlineshop.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import de.telran.onlineshop.entity.FavoritesEntity;
 import de.telran.onlineshop.entity.OrdersEntity;
+import jakarta.validation.constraints.*;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -10,11 +11,24 @@ import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
+    @Max(10000)
+//    @Min(10)
     private Long userID;
+
+    @Size(min=2,max=30, message = "Invalid name: Must be of 2 - 30 characters")
     private String name;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)// esli ravno null - skrit v vivode
+    @Email(message = "Invalid email")
     private String email;
+
+
+//    @NotEmpty
+    @NotBlank(message = "Invalid Phone number")
+    @Pattern(regexp = "^\\d{12}$", message = "Invalid phone number")
     private String phoneNumber;
+
+
     private String passwordHash;
 
     private Set<FavoritesDto> favorites = new HashSet<>();

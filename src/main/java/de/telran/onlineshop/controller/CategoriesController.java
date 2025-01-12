@@ -2,8 +2,10 @@ package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.dto.CategoryDto;
 import de.telran.onlineshop.service.CategoriesService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
@@ -31,7 +33,7 @@ public class CategoriesController {
     }
 
     @GetMapping(value = "/find/{id}")
-    public CategoryDto getCategoryById(@PathVariable Long id) { ///categories/find/3
+    public CategoryDto getCategoryById(@PathVariable Long id) throws FileNotFoundException { ///categories/find/3
         return categoryService.getCategoryById(id);
     }
 
@@ -43,13 +45,13 @@ public class CategoriesController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping //Jackson
-    public boolean createCategories(@RequestBody CategoryDto newCategory) { //insert
+    public boolean createCategories(@RequestBody @Valid CategoryDto newCategory) { //insert
         return categoryService.createCategories(newCategory);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public CategoryDto updateCategories(@RequestBody CategoryDto updCategory) { //update
+    public CategoryDto updateCategories(@RequestBody @Valid CategoryDto updCategory) { //update
         return categoryService.updateCategories(updCategory);
     }
 
@@ -62,16 +64,16 @@ public class CategoriesController {
     @ExceptionHandler({IllegalArgumentException.class, FileNotFoundException.class})
     public ResponseEntity handleTwoException(Exception exception) {
         return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(exception.getMessage());
+                .status(HttpStatus.NO_CONTENT)
+                .body("Categories Controller"+exception.getMessage());
     }
 
-    // альтернативная обработка ошибочной ситуации Exception
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity handleException(Exception exception) {
-        return ResponseEntity
-                .status(HttpStatus.I_AM_A_TEAPOT)
-                .body("Извините, что-то пошло не так. Попробуйте позже!");
-    }
+//    // альтернативная обработка ошибочной ситуации Exception
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity handleException(Exception exception) {
+//        return ResponseEntity
+//                .status(HttpStatus.I_AM_A_TEAPOT)
+//                .body("Извините, что-то пошло не так. Попробуйте позже!" + exception.getMessage());
+//    }
 
 }

@@ -2,6 +2,7 @@ package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.dto.CartItemsDto;
 import de.telran.onlineshop.service.CartItemsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,12 @@ public class CartItemsController {
     }
 
     @PutMapping
-    public CartItemsDto updateCartItems(@RequestBody CartItemsDto cartItem) {
+    public CartItemsDto updateCartItems(@RequestBody @Valid CartItemsDto cartItem) {
         return cartItemsService.updateCartItems(cartItem);
     }
 
     @PostMapping
-    public CartItemsDto insertCartItems(@RequestBody CartItemsDto cartItem) {
+    public CartItemsDto insertCartItems(@RequestBody @Valid CartItemsDto cartItem) {
         return cartItemsService.insertCartItems(cartItem);
     }
 

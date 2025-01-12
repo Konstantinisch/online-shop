@@ -1,9 +1,20 @@
 package de.telran.onlineshop.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 import java.util.Objects;
 
 public class CategoryDto {
+
+    @PositiveOrZero(message = "Invalid: must be > or = 0") //@Min(0)
     private long categoryID;
+
+    @NotNull
+    @NotEmpty(message = "Invalid name: Empty name")
+    @Size(min=2,max=30, message = "Invalid name: Must be of 2 - 30 characters")
     private String name;
 
     public CategoryDto() {

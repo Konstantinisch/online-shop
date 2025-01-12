@@ -1,12 +1,18 @@
 package de.telran.onlineshop.dto;
 
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class OrdersDto {
+    @PositiveOrZero(message = "Invalid Id: must be greater than or equal to 0")
     private Long orderId;
     private int userId;
     private Timestamp createdAt;
+
+    @Size(min = 2, max = 90, message = "Invalid name: must be of 2 - 90 characters")
     private String deliveryAddress;
     private int contactPhone;
     private String deliveryMethod;

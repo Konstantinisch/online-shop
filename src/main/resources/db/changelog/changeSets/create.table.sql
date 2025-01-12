@@ -33,7 +33,7 @@ CREATE TABLE Users (
     Email VARCHAR(255) NOT NULL UNIQUE,
     PhoneNumber VARCHAR(255),
     PasswordHash VARCHAR(255) NOT NULL,
-    Role ENUM('Клиент', 'Администратор') NUll DEFAULT 'Клиент'
+    Role ENUM('CLIENT', 'ADMIN') NUll DEFAULT 'CLIENT'
 );
 
 CREATE TABLE Orders (

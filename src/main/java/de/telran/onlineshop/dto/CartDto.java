@@ -1,10 +1,14 @@
 package de.telran.onlineshop.dto;
 
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.util.Objects;
 import java.util.Set;
 
 public class CartDto {
+    @PositiveOrZero(message = "Invalid ID: must be greater than or equal to 0 ")
     private long cartID;
+
     private long userID;
 
     private Set<CartItemsDto> cartItems;

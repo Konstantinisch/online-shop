@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -85,7 +86,8 @@ public class CategoriesService {
 //    }
 
 
-    public CategoryDto getCategoryById( Long id) { ///categories/find/3
+    public CategoryDto getCategoryById( Long id) throws FileNotFoundException { ///categories/find/3
+        if (id<0) throw  new NullPointerException(id + "not found");
 
         CategoriesEntity categoriesEntity = categoriesRepository.findById(id).orElse(new CategoriesEntity());
         return new CategoryDto(categoriesEntity.getCategoryId(), categoriesEntity.getName());

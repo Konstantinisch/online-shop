@@ -2,6 +2,7 @@ package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.service.CartService;
 import de.telran.onlineshop.dto.CartDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,13 +35,13 @@ public class CartController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/add")
-    public CartDto createCart(@RequestBody CartDto newCart) {
+    public CartDto createCart(@RequestBody @Valid CartDto newCart) {
         return cartService.createCart(newCart);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public CartDto updateCart(@RequestBody CartDto currentCart) {
+    public CartDto updateCart(@RequestBody @Valid CartDto currentCart) {
         return cartService.updateCart(currentCart);
     }
 

@@ -2,6 +2,7 @@ package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.dto.ProductsDto;
 import de.telran.onlineshop.service.ProductsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -29,13 +30,13 @@ public class ProductsController {
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
-    public ProductsDto updateProduct(@RequestBody ProductsDto productsDto) {
+    public ProductsDto updateProduct(@RequestBody @Valid ProductsDto productsDto) {
        return productsService.updateProduct(productsDto);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PutMapping
-    public ProductsDto insertProduct(@RequestBody ProductsDto productsDto) {
+    public ProductsDto insertProduct(@RequestBody @Valid ProductsDto productsDto) {
        return productsService.insertProduct(productsDto);
     }
 

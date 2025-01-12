@@ -3,6 +3,7 @@ package de.telran.onlineshop.controller;
 //import de.telran.onlineshop.model.Orders;
 import de.telran.onlineshop.dto.OrdersDto;
 import de.telran.onlineshop.service.OrdersService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,13 +36,13 @@ public class OrdersController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping //Jackson
-    public boolean createOrders(@RequestBody OrdersDto newOrder) { //insert
+    public boolean createOrders(@RequestBody @Valid OrdersDto newOrder) { //insert
         return ordersService.createOrders(newOrder);
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
     @PutMapping
-    public OrdersDto updateOrder(@RequestBody OrdersDto updOrder) { //update
+    public OrdersDto updateOrder(@RequestBody @Valid OrdersDto updOrder) { //update
         return ordersService.updateOrders(updOrder);
     }
 

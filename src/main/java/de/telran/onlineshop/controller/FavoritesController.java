@@ -4,6 +4,7 @@ package de.telran.onlineshop.controller;
 import de.telran.onlineshop.dto.FavoritesDto;
 import de.telran.onlineshop.entity.FavoritesEntity;
 import de.telran.onlineshop.service.FavoritesService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,12 +28,12 @@ public class FavoritesController {
     }
 
     @PutMapping
-    public FavoritesDto updateFavorites(@RequestBody FavoritesDto favoritesDto) {
+    public FavoritesDto updateFavorites(@RequestBody @Valid FavoritesDto favoritesDto) {
         return favoritesService.updateFavorites(favoritesDto);
     }
 
     @PostMapping
-    public FavoritesDto insertFavorites(@RequestBody FavoritesDto favoritesDto) {
+    public FavoritesDto insertFavorites(@RequestBody @Valid FavoritesDto favoritesDto) {
         return favoritesService.insertFavorites(favoritesDto);
     }
 
