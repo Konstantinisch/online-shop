@@ -1,12 +1,15 @@
 package de.telran.onlineshop.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.Objects;
 import java.util.Set;
 
+@Schema(description = "Data for user")
 public class CartDto {
     @PositiveOrZero(message = "Invalid ID: must be greater than or equal to 0 ")
+    @Schema(description = "Unique Data of Cart")
     private long cartID;
 
     private long userID;

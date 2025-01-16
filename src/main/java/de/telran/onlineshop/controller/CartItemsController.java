@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/cartItems")
 @RequiredArgsConstructor
-public class CartItemsController {
+public class CartItemsController implements CartItemsControllerInterface{
 
 //    private List<CartItemsDto> cartItemsList;
 

@@ -1,19 +1,25 @@
 package de.telran.onlineshop.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Timestamp;
 import java.util.Objects;
 
+@Schema(description = "Data for users")
 public class OrdersDto {
     @PositiveOrZero(message = "Invalid Id: must be greater than or equal to 0")
+    @Schema(description = "Unique key of Order")
     private Long orderId;
     private int userId;
     private Timestamp createdAt;
 
     @Size(min = 2, max = 90, message = "Invalid name: must be of 2 - 90 characters")
+    @Schema(description = "Name of deliveryAddress", example = "new Address")
     private String deliveryAddress;
+
+    @Schema(description = "Number of Phone", example = "123454321")
     private int contactPhone;
     private String deliveryMethod;
     private OrdersEnum status;

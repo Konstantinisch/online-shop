@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/orders")
-public class OrdersController {
+public class OrdersController implements OrdersControllerInterface{
 
     private  OrdersService ordersService;
 

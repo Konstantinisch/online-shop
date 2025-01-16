@@ -41,7 +41,7 @@ public class OrdersEntity {
     @Column(name = "Status")
     private OrdersEnum status;
 
-    @Column(name = "UpdateAt")
+    @Column(name = "UpdatedAt")
     private Timestamp updatedAt;
 
     @OneToMany(mappedBy = "orders")

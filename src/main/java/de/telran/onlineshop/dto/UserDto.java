@@ -3,6 +3,7 @@ package de.telran.onlineshop.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import de.telran.onlineshop.entity.FavoritesEntity;
 import de.telran.onlineshop.entity.OrdersEntity;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 
 import java.util.HashSet;
@@ -10,12 +11,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Schema(description = "User Data for users")
 public class UserDto {
     @Max(10000)
 //    @Min(10)
     private Long userID;
 
     @Size(min=2,max=30, message = "Invalid name: Must be of 2 - 30 characters")
+    @Schema(description = "Name of User", example = "Anna")
     private String name;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)// esli ravno null - skrit v vivode

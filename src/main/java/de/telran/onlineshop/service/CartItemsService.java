@@ -67,7 +67,7 @@ public class CartItemsService {
 
     public CartItemsDto insertCartItems(CartItemsDto cartItem) {
         CartItemsEntity cartItemsEntity = mappers.convertToCartItemsEntity(cartItem);
-        cartItemsEntity.setCartItemsId(null);
+        cartItemsEntity.setCartItemId(null);
         CartItemsEntity savedCartItemsEntity = cartItemsRepository.save(cartItemsEntity);
         return mappers.convertToCartItemsDto(savedCartItemsEntity);
     }

@@ -14,9 +14,9 @@ import lombok.*;
 public class CartItemsEntity {
 
     @Id
-    @Column(name = "CartItemsID")
+    @Column(name = "CartItemID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartItemsId;
+    private Long cartItemId;
 
 //    @Column(name = "CartID")
 //    private int cartId;

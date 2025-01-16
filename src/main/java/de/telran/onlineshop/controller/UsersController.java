@@ -2,6 +2,8 @@ package de.telran.onlineshop.controller;
 
 import de.telran.onlineshop.dto.UserDto;
 import de.telran.onlineshop.service.UsersService;
+import io.swagger.v3.oas.annotations.Hidden;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/users")
 @RequiredArgsConstructor
-public class UsersController {
+//@Tag(name = "Secret controller User", description = "Use for working with ")
+public class UsersController implements UsersControllerInterface{
 
     private final UsersService usersService;
 

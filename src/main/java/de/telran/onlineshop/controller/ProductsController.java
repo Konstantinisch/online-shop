@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/products")
 @RequiredArgsConstructor
-public class ProductsController {
+public class ProductsController implements ProductsControllerInterface {
 
     private final ProductsService productsService;
 
@@ -29,13 +29,13 @@ public class ProductsController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping
+    @PutMapping
     public ProductsDto updateProduct(@RequestBody @Valid ProductsDto productsDto) {
        return productsService.updateProduct(productsDto);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PutMapping
+    @PostMapping
     public ProductsDto insertProduct(@RequestBody @Valid ProductsDto productsDto) {
        return productsService.insertProduct(productsDto);
     }

@@ -1,5 +1,6 @@
 package de.telran.onlineshop.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -7,11 +8,14 @@ import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
+@Schema(description = "suschnost categoriy")
 public class CategoryDto {
 
     @PositiveOrZero(message = "Invalid: must be > or = 0") //@Min(0)
+    @Schema(description = "Уникальный идентификатор категории", example = "2"/*, accessMode = Schema.AccessMode.READ_ONLY*/)
     private long categoryID;
 
+    @Schema(description ="name of категории", example = "new category")
     @NotNull
     @NotEmpty(message = "Invalid name: Empty name")
     @Size(min=2,max=30, message = "Invalid name: Must be of 2 - 30 characters")
