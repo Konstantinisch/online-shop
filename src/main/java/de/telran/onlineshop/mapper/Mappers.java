@@ -20,9 +20,16 @@ public class Mappers {
     private final ModelMapper modelMapper;
 
     public UserDto convertToUserDto(UsersEntity usersEntity) {
-        modelMapper.typeMap(UsersEntity.class, UserDto.class)
-                .addMappings(mapper -> mapper.skip(UserDto::setEmail)); // исключаем этот метод из работы
-        UserDto userDto = modelMapper.map(usersEntity, UserDto.class); //автомат
+//        modelMapper.typeMap(UsersEntity.class, UserDto.class)
+//                .addMappings(mapper -> mapper.skip(UserDto::setCart)); // исключаем этот метод из работы
+//        UserDto userDto = modelMapper.map(usersEntity, UserDto.class); //автомат
+        UserDto userDto = new UserDto(
+                usersEntity.getUserId(),
+                usersEntity.getName(),
+                usersEntity.getEmail(),
+                usersEntity.getPhoneNumber(),
+                usersEntity.getPasswordHash()
+        );
         if (userDto.getPasswordHash() != null)
             userDto.setPasswordHash("***"); // замещаем данных
 
@@ -31,10 +38,17 @@ public class Mappers {
             Set<FavoritesDto> favoritesDtoSet = MapperUtil.convertSet(usersEntity.getFavorites(), this::convertToFavoritesDto);
             userDto.setFavorites(favoritesDtoSet);
         }
+//
+//        CartDto cartDto = convertToCartDto(usersEntity.getCart()); // второй связанный объект
+//        userDto.setCart(cartDto);
 
-        CartDto cartDto = convertToCartDto(usersEntity.getCart()); // второй связанный объект
-        userDto.setCart(cartDto);
+//        if (usersEntity.getOrdersEntities()!=null) {
+//            Set<OrdersDto> ordersDtoSet = MapperUtil.convertSet(usersEntity.getOrdersEntities(), this::convertOrdersDto);
+//            userDto.set(ordersDtoSet);
+//        }
         return userDto;
+
+
     }
 
     public CartDto convertToCartDto(CartEntity cartEntity) {

@@ -28,7 +28,7 @@ public class CartEntity {
     private UsersEntity user;
 
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany(mappedBy = "cart",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<CartItemsEntity> cartItems = new HashSet<>();
 
     public CartEntity(Object o, Object o1) {

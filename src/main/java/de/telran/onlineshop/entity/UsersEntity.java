@@ -38,13 +38,13 @@ public class UsersEntity {
     @Column(name = "Role")
     private Role role;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private CartEntity cart;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<FavoritesEntity> favorites = new HashSet<>();
 
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users" , cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<OrdersEntity> ordersEntities = new HashSet<>();
 
     public UsersEntity(Object o, String дуняСеменова, String mail, String number, String number1, Role role, CartEntity cart2, Object o1, Object o2) {

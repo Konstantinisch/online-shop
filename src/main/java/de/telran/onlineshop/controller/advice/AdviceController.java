@@ -39,13 +39,13 @@ public class AdviceController {
         return errorResponse;
     }
 
-    // альтернативная обработка ошибочной ситуации Exception
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity handleException(Exception exception) {
-        return ResponseEntity
-                .status(HttpStatus.I_AM_A_TEAPOT)
-                .body("AdviceCOntroller" + "Извините, что-то пошло не так. Попробуйте позже!" + exception.getMessage());
-    }
+//    // альтернативная обработка ошибочной ситуации Exception
+//    @ExceptionHandler(Exception.class)
+//    public ResponseEntity handleException(Exception exception) {
+//        return ResponseEntity
+//                .status(HttpStatus.I_AM_A_TEAPOT)
+//                .body("AdviceCOntroller" + "Извините, что-то пошло не так. Попробуйте позже!" + exception.getMessage());
+//    }
 
 
 }
